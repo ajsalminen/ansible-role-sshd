@@ -1,2 +1,29 @@
----
-# tasks file for ajsalminen.sshd
+- name: Install openssh packages
+  action: apt pkg={{item}} state=present
+  with_items:
+    - ssh
+    - openssh-client
+    - openssh-server
+  notify:
+    - restart sshd
+
+- name: Manage sshd_config.
+  template: src=sshd_config.j2 dest=/etc/ssh/sshd_config
+          owner=root group=root mode=0644 backup=yes
+  notify:
+    - restart sshd
+
+- name: Generate known_hosts if wanted.
+  local_action: shell ansible all --list | xargs ssh-keyscan -H > {{server_assets_path}}known_hosts
+  when: sshd_regenerate_known_hosts is defined
+
+- name: Generate additional known_hosts entries for non-inventory hosts.
+  local_action: shell echo '{{item}}' | xargs ssh-keyscan -H >> {{server_assets_path}}known_hosts
+  with_items: sshd_additional_known_hosts
+  when: sshd_regenerate_known_hosts is defined
+
+- name: Copy known_hosts in place.
+  copy: src=known_hosts dest=/etc/ssh/ssh_known_hosts mode=0644 owner=root group=root
+
+- name: Ensure sshd is running
+  action: service name=ssh state=running
