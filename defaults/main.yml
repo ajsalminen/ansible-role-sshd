@@ -1,2 +1,4 @@
 ---
 # defaults file for ajsalminen.sshd
+PLAYBOOK_PRIVATE_ROLE_ASSETS_PATH: "{{playbook_dir}}assets/private/roles/"
+sshd_assets_path: "{{PLAYBOOK_PRIVATE_ROLE_ASSETS_PATH}}sshd/"
