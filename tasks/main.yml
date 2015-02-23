@@ -29,7 +29,7 @@
   when: sshd_regenerate_known_hosts is defined
  
 - name: Copy known_hosts in place.
-  copy: src=known_hosts dest=/etc/ssh/ssh_known_hosts mode=0644 owner=root group=root
+  copy: src={{sshd_assets_path}}known_hosts dest=/etc/ssh/ssh_known_hosts mode=0644 owner=root group=root
 
 - name: Ensure sshd is running
   action: service name=ssh state=running
