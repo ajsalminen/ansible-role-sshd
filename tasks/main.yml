@@ -25,8 +25,9 @@
 - name: Generate additional known_hosts entries for non-inventory hosts.
   local_action: shell echo '{{item}}' | xargs ssh-keyscan -H >> {{sshd_assets_path}}known_hosts
   with_items: sshd_additional_known_hosts
+  sudo: no
   when: sshd_regenerate_known_hosts is defined
-
+ 
 - name: Copy known_hosts in place.
   copy: src=known_hosts dest=/etc/ssh/ssh_known_hosts mode=0644 owner=root group=root
 
