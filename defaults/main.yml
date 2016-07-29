@@ -2,3 +2,6 @@
 # defaults file for ajsalminen.sshd
 PLAYBOOK_PRIVATE_ROLE_ASSETS_PATH: "{{playbook_dir}}assets/private/roles/"
 sshd_assets_path: "{{PLAYBOOK_PRIVATE_ROLE_ASSETS_PATH}}sshd/"
+sshd_group: root
+sshd_service_name: ssh
+sshd_sftp_path: /usr/lib/openssh/sftp-server

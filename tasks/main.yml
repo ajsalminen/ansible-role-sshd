@@ -6,10 +6,12 @@
     - openssh-server
   notify:
     - restart sshd
+  when: ansible_os_family == 'Debian'
+
 
 - name: Manage sshd_config.
   template: src=sshd_config.j2 dest=/etc/ssh/sshd_config
-          owner=root group=root mode=0644 backup=yes
+          owner=root group={{ sshd_group }} mode=0644 backup=yes
   notify:
     - restart sshd
 
@@ -25,11 +27,11 @@
 - name: Generate additional known_hosts entries for non-inventory hosts.
   local_action: shell echo '{{item}}' | xargs ssh-keyscan -H >> {{sshd_assets_path}}known_hosts
   with_items: sshd_additional_known_hosts
-  sudo: no
   when: sshd_regenerate_known_hosts is defined
- 
+  sudo: no
+
 - name: Copy known_hosts in place.
-  copy: src={{sshd_assets_path}}known_hosts dest=/etc/ssh/ssh_known_hosts mode=0644 owner=root group=root
+  copy: src={{sshd_assets_path}}known_hosts dest=/etc/ssh/ssh_known_hosts mode=0644 owner=root group={{ sshd_group }}
 
 - name: Ensure sshd is running
-  action: service name=ssh state=running
+  action: service name={{ sshd_service_name }} state=running
