@@ -85,3 +85,9 @@ Subsystem sftp {{ sshd_sftp_path }}
 # PAM authentication, then enable this but set PasswordAuthentication
 # and ChallengeResponseAuthentication to 'no'.
 UsePAM yes
+
+{% if sshd_sftp_path == 'internal-sftp' %}
+Match Group {{ sshd_sftp_group }}
+    ChrootDirectory {{ sshd_sftp_chroot_dir }}
+    ForceCommand {{ sshd_sftp_path }}
+{% endif %}
