@@ -17,7 +17,7 @@
     mode: 0755
   when: sshd_sftp_path == "internal-sftp"
 
-- name: Ensure SFTP share folder exists
+- name: Ensure SFTP share folder exists.
   file:
     path: "{{sshd_sftp_chroot_dir}}/share"
     state: directory
