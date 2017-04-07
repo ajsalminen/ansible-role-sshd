@@ -8,6 +8,14 @@
     - restart sshd
   when: ansible_os_family == 'Debian'
 
+- name: Ensure SFTP-folder for chrooted users exists.
+  file:
+    path: "{{sshd_sftp_chroot_dir}}"
+    state: directory
+    owner: "root"
+    group: "root"
+    mode: 0755
+  when: sshd_sftp_path == 'internal-sftp'
 
 - name: Manage sshd_config.
   template: src=sshd_config.j2 dest=/etc/ssh/sshd_config

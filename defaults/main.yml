@@ -5,3 +5,5 @@ sshd_assets_path: "{{PLAYBOOK_PRIVATE_ROLE_ASSETS_PATH}}sshd/"
 sshd_group: root
 sshd_service_name: ssh
 sshd_sftp_path: /usr/lib/openssh/sftp-server
+sshd_sftp_group: sftpusers
+sshd_sftp_chroot_dir: /srv/sftp
