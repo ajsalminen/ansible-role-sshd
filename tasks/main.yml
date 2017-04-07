@@ -10,10 +10,10 @@
 
 - name: Ensure SFTP-folder for chrooted users exists.
   file:
-    path: "{{sshd_sftp_chroot_dir}}"
+    path: '{{sshd_sftp_chroot_dir}}'
     state: directory
-    owner: "root"
-    group: "root"
+    owner: root
+    group: root
     mode: 0755
   when: sshd_sftp_path == 'internal-sftp'
 
