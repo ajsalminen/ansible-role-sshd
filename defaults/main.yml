@@ -7,3 +7,4 @@ sshd_service_name: ssh
 sshd_sftp_path: /usr/lib/openssh/sftp-server
 sshd_sftp_group: sftpusers
 sshd_sftp_chroot_dir: /srv/sftp
+sshd_additional_known_hosts: []
