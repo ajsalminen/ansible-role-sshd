@@ -51,4 +51,4 @@
   copy: src={{sshd_assets_path}}known_hosts dest=/etc/ssh/ssh_known_hosts mode=0644 owner=root group={{ sshd_group }}
 
 - name: Ensure sshd is running
-  action: service name={{ sshd_service_name }} state=running
+  action: service name={{ sshd_service_name }} state=started
