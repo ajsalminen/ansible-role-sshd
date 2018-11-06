@@ -1,9 +1,9 @@
 - name: Install openssh packages
-  action: apt pkg={{item}} state=present
-  with_items:
-    - ssh
-    - openssh-client
-    - openssh-server
+  apt:
+    name: 
+      - ssh
+      - openssh-client
+      - openssh-server
   notify:
     - restart sshd
   when: ansible_os_family == 'Debian'
