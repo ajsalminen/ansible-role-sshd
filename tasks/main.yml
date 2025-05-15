@@ -1,7 +1,6 @@
 - name: Install openssh packages
   apt:
     name: 
-      - ssh
       - openssh-client
       - openssh-server
   notify:
