@@ -22,6 +22,7 @@ PermitRootLogin without-password
 StrictModes yes
 
 PubkeyAuthentication yes
+PubkeyAcceptedAlgorithms=+ssh-rsa
 AuthorizedKeysFile	%h/.ssh/authorized_keys
 
 # Don't read the user's ~/.rhosts and ~/.shosts files
