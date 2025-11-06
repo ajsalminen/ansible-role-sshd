@@ -1,4 +1,4 @@
 ---
 # handlers file for ajsalminen.sshd
 
-- include: openssh.yml
+- import_tasks: openssh.yml
